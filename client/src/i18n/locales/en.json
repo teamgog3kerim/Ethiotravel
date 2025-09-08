@@ -1,0 +1,93 @@
+{
+  "nav": {
+    "home": "Home",
+    "booking": "Book Now", 
+    "services": "Services",
+    "dashboard": "Dashboard"
+  },
+  "hero": {
+    "title": "Discover Ethiopia with VIP Excellence",
+    "subtitle": "Experience premium travel services, luxury accommodations, and personalized tours in the heart of Africa",
+    "startJourney": "Start Your Journey",
+    "viewServices": "View Services"
+  },
+  "updates": {
+    "title": "Latest Travel Updates",
+    "weather": "Addis Ababa Weather"
+  },
+  "services": {
+    "title": "VIP Services",
+    "subtitle": "Experience Ethiopia with our premium travel services designed for discerning travelers",
+    "airport": "Airport Pickup & Drop",
+    "airportDesc": "Luxury vehicle transportation with professional drivers for seamless airport transfers",
+    "hotel": "Hotel Booking Assistance", 
+    "hotelDesc": "Premium hotel reservations and accommodation management tailored to your preferences",
+    "tours": "Addis Ababa City Tours",
+    "toursDesc": "Guided tours of Ethiopia's capital with expert local guides and cultural experiences",
+    "halal": "Halal Restaurants",
+    "halalDesc": "Curated dining experiences at the finest halal restaurants with authentic Ethiopian cuisine",
+    "coffee": "Ethiopian Coffee Ceremony",
+    "coffeeDesc": "Traditional coffee ceremonies and cultural experiences celebrating Ethiopia's coffee heritage",
+    "business": "Business/Medical Assistance",
+    "businessDesc": "Professional support for business meetings and medical appointments with translation services"
+  },
+  "booking": {
+    "title": "Book Your VIP Experience",
+    "subtitle": "Fill out the form below to start planning your premium Ethiopian adventure",
+    "personalInfo": "Personal Information",
+    "fullName": "Full Name",
+    "email": "Email Address", 
+    "passportPhoto": "Passport Photo Upload",
+    "uploadText": "Click to upload passport photo",
+    "travelDetails": "Travel Details",
+    "numberOfPersons": "Number of Persons",
+    "arrivalDate": "Arrival Date",
+    "departureDate": "Departure Date", 
+    "hotelPreference": "Hotel Preference",
+    "travelPurpose": "Travel Purpose",
+    "specialRequests": "Special Requests",
+    "totalPrice": "Total Package Price:",
+    "priceIncludes": "Price includes all VIP services listed above",
+    "proceedPayment": "Proceed to Payment"
+  },
+  "payment": {
+    "title": "Secure USDT Payment",
+    "subtitle": "Complete your booking with cryptocurrency payment",
+    "details": "Payment Details",
+    "currency": "Currency:",
+    "network": "Network:",
+    "amount": "Amount:",
+    "walletAddress": "Wallet Address:",
+    "important": "Important", 
+    "exactAmount": "• Send exact amount only",
+    "tronNetwork": "• Use TRON (TRC20) network only",
+    "saveTransaction": "• Save transaction ID for confirmation",
+    "scanToPay": "Scan to pay with USDT",
+    "transactionId": "Transaction ID",
+    "confirmPayment": "Confirm Payment"
+  },
+  "dashboard": {
+    "title": "Admin Dashboard",
+    "subtitle": "Manage bookings, track tourists, and oversee operations",
+    "totalBookings": "Total Bookings",
+    "activeTourists": "Active Tourists", 
+    "revenue": "Revenue (USDT)",
+    "thisMonth": "This Month",
+    "recentBookings": "Recent Bookings",
+    "viewAll": "View All",
+    "exportPdf": "Export PDF",
+    "exportExcel": "Export Excel",
+    "customer": "Customer",
+    "dates": "Dates",
+    "travelers": "Travelers",
+    "amount": "Amount",
+    "status": "Status",
+    "calendarView": "Calendar View"
+  },
+  "footer": {
+    "description": "Experience Ethiopia with our premium VIP travel services. From luxury accommodations to personalized tours, we make your journey unforgettable.",
+    "quickLinks": "Quick Links",
+    "contactInfo": "Contact Info",
+    "copyright": "© 2024 Kerim VIP Tours. All rights reserved. Premium travel services in Ethiopia."
+  }
+}
