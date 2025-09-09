@@ -7,8 +7,11 @@ export function Booking() {
   const [showPayment, setShowPayment] = useState(false);
   const [bookingAmount, setBookingAmount] = useState(500);
 
-  const handleBookingCreated = (bookingId: string) => {
+  const handleBookingCreated = (bookingId: string, amount?: number) => {
     setCurrentBookingId(bookingId);
+    if (amount) {
+      setBookingAmount(amount);
+    }
     setShowPayment(true);
     // Scroll to payment section
     setTimeout(() => {

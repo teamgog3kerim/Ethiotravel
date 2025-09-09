@@ -30,7 +30,7 @@ const pricing = {
 };
 
 interface BookingFormProps {
-  onBookingCreated?: (bookingId: string) => void;
+  onBookingCreated?: (bookingId: string, amount?: number) => void;
 }
 
 export function BookingForm({ onBookingCreated }: BookingFormProps) {
@@ -41,7 +41,12 @@ export function BookingForm({ onBookingCreated }: BookingFormProps) {
   const [calculatedPrice, setCalculatedPrice] = useState(0);
 
   const form = useForm<BookingFormData>({
-    resolver: zodResolver(insertBookingSchema),
+    resolver: zodResolver(insertBookingSchema.extend({
+      fullName: z.string().min(1, "Full name is required"),
+      email: z.string().email("Valid email is required"),
+      hotelPreference: z.string().min(1, "Hotel preference is required"),
+      travelPurpose: z.string().min(1, "Travel purpose is required")
+    })),
     defaultValues: {
       fullName: "",
       email: "",
@@ -87,7 +92,7 @@ export function BookingForm({ onBookingCreated }: BookingFormProps) {
       setCalculatedPrice(0);
       
       if (onBookingCreated) {
-        onBookingCreated(booking.id);
+        onBookingCreated(booking.id, calculatedPrice || booking.totalAmount);
       }
     },
     onError: (error: any) => {
@@ -282,6 +287,11 @@ export function BookingForm({ onBookingCreated }: BookingFormProps) {
                       <SelectItem value="business">Business Hotel</SelectItem>
                     </SelectContent>
                   </Select>
+                  {form.formState.errors.hotelPreference && (
+                    <p className="text-sm text-destructive mt-1">
+                      {form.formState.errors.hotelPreference.message}
+                    </p>
+                  )}
                 </div>
                 
                 <div>
@@ -298,6 +308,11 @@ export function BookingForm({ onBookingCreated }: BookingFormProps) {
                       <SelectItem value="conference">Conference</SelectItem>
                     </SelectContent>
                   </Select>
+                  {form.formState.errors.travelPurpose && (
+                    <p className="text-sm text-destructive mt-1">
+                      {form.formState.errors.travelPurpose.message}
+                    </p>
+                  )}
                 </div>
               </div>
               

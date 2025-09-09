@@ -64,7 +64,10 @@
     "saveTransaction": "• احفظ معرف المعاملة للتأكيد",
     "scanToPay": "امسح للدفع بـ USDT",
     "transactionId": "معرف المعاملة",
-    "confirmPayment": "تأكيد الدفع"
+    "confirmPayment": "تأكيد الدفع",
+    "confirmed": "تم تأكيد الدفع!",
+    "confirmedDesc": "تم التحقق من دفعتك بنجاح. ستتلقى تأكيد حجز محدث عبر البريد الإلكتروني.",
+    "confirming": "جاري التأكيد..."
   },
   "dashboard": {
     "title": "لوحة تحكم الإدارة",

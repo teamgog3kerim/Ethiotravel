@@ -64,7 +64,10 @@
     "saveTransaction": "• Save transaction ID for confirmation",
     "scanToPay": "Scan to pay with USDT",
     "transactionId": "Transaction ID",
-    "confirmPayment": "Confirm Payment"
+    "confirmPayment": "Confirm Payment",
+    "confirmed": "Payment Confirmed!",
+    "confirmedDesc": "Your payment has been successfully verified. You will receive an updated booking confirmation via email.",
+    "confirming": "Confirming..."
   },
   "dashboard": {
     "title": "Admin Dashboard",

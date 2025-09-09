@@ -75,7 +75,7 @@ function generateBookingPDF(booking: any, language: string = "en"): Buffer {
   doc.text(`${isArabic ? "الباقة:" : "Package:"} VIP Ethiopia Tour`);
   doc.text(`${isArabic ? "إجمالي USDT:" : "Total USDT:"} $${booking.totalAmount}`);
   doc.text(`${isArabic ? "حالة الدفع:" : "Payment Status:"} ${booking.paymentStatus}`);
-  doc.text(`${isArabic ? "عنوان المحفظة:" : "Wallet Address:"} TKhpVbVKLkdpQEBTJaRhwNxWTgZ2vWQBSk`);
+  doc.text(`${isArabic ? "عنوان المحفظة:" : "Wallet Address:"} TCdeZjG39zU9SjtoLwfXmcedJhnXyNd8zB`);
   if (booking.transactionId) {
     doc.text(`${isArabic ? "معرف المعاملة:" : "Transaction ID:"} ${booking.transactionId}`);
   }
@@ -142,7 +142,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const bookingData = {
         ...req.body,
         numberOfPersons: parseInt(req.body.numberOfPersons),
-        totalAmount: pricing[parseInt(req.body.numberOfPersons) as keyof typeof pricing] || 0,
+        totalAmount: pricing[parseInt(req.body.numberOfPersons) as keyof typeof pricing] || 500,
         passportPhotoPath: req.file?.path,
       };
 

@@ -20,8 +20,9 @@ export function PaymentSection({ bookingId, amount = 500 }: PaymentSectionProps)
   const { toast } = useToast();
   const [transactionId, setTransactionId] = useState("");
   const [isCopied, setIsCopied] = useState(false);
+  const [paymentConfirmed, setPaymentConfirmed] = useState(false);
 
-  const walletAddress = "TKhpVbVKLkdpQEBTJaRhwNxWTgZ2vWQBSk";
+  const walletAddress = "TCdeZjG39zU9SjtoLwfXmcedJhnXyNd8zB";
   
   const confirmPaymentMutation = useMutation({
     mutationFn: async (data: { transactionId: string }) => {
@@ -36,9 +37,10 @@ export function PaymentSection({ bookingId, amount = 500 }: PaymentSectionProps)
       return response.json();
     },
     onSuccess: () => {
+      setPaymentConfirmed(true);
       toast({
         title: t('payment.success', 'Payment Confirmed'),
-        description: t('payment.successDesc', 'Your payment has been confirmed successfully.'),
+        description: t('payment.successDesc', 'Your payment has been confirmed successfully. You will receive an updated confirmation email.'),
       });
       setTransactionId("");
     },
@@ -167,31 +169,43 @@ export function PaymentSection({ bookingId, amount = 500 }: PaymentSectionProps)
             </div>
             
             {/* Transaction Confirmation */}
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="transactionId">{t('payment.transactionId')}</Label>
-                <Input
-                  id="transactionId"
-                  value={transactionId}
-                  onChange={(e) => setTransactionId(e.target.value)}
-                  placeholder="Enter transaction ID after payment"
-                  data-testid="input-transactionId"
-                />
+            {paymentConfirmed ? (
+              <div className="bg-accent/20 border border-accent rounded-lg p-6 text-center">
+                <CheckCircle className="h-12 w-12 text-accent mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-accent mb-2">
+                  {t('payment.confirmed', 'Payment Confirmed!')}
+                </h3>
+                <p className="text-muted-foreground">
+                  {t('payment.confirmedDesc', 'Your payment has been successfully verified. You will receive an updated booking confirmation via email.')}
+                </p>
               </div>
-              
-              <Button
-                onClick={handleConfirmPayment}
-                disabled={confirmPaymentMutation.isPending || !transactionId.trim()}
-                className="bg-accent hover:bg-accent/90 text-accent-foreground px-6 py-3 rounded-lg font-semibold transition-all"
-                data-testid="button-confirmPayment"
-              >
-                <CheckCircle className="mr-2 h-4 w-4" />
-                {confirmPaymentMutation.isPending 
-                  ? (t('payment.confirming', 'Confirming...'))
-                  : t('payment.confirmPayment')
-                }
-              </Button>
-            </div>
+            ) : (
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="transactionId">{t('payment.transactionId')}</Label>
+                  <Input
+                    id="transactionId"
+                    value={transactionId}
+                    onChange={(e) => setTransactionId(e.target.value)}
+                    placeholder="Enter transaction ID after payment"
+                    data-testid="input-transactionId"
+                  />
+                </div>
+                
+                <Button
+                  onClick={handleConfirmPayment}
+                  disabled={confirmPaymentMutation.isPending || !transactionId.trim()}
+                  className="bg-accent hover:bg-accent/90 text-accent-foreground px-6 py-3 rounded-lg font-semibold transition-all"
+                  data-testid="button-confirmPayment"
+                >
+                  <CheckCircle className="mr-2 h-4 w-4" />
+                  {confirmPaymentMutation.isPending 
+                    ? (t('payment.confirming', 'Confirming...'))
+                    : t('payment.confirmPayment')
+                  }
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </div>
