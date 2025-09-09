@@ -24,16 +24,19 @@ const upload = multer({
   },
 });
 
-// Configure nodemailer
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || "smtp.gmail.com",
-  port: parseInt(process.env.SMTP_PORT || "587"),
-  secure: false,
-  auth: {
-    user: process.env.SMTP_USER || "teamgog3@gmail.com",
-    pass: process.env.SMTP_PASSWORD || "your-app-password",
-  },
-});
+// Configure nodemailer (only if credentials are provided)
+let transporter: any = null;
+if (process.env.SMTP_USER && process.env.SMTP_PASSWORD) {
+  transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST || "smtp.gmail.com",
+    port: parseInt(process.env.SMTP_PORT || "587"),
+    secure: false,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASSWORD,
+    },
+  });
+}
 
 // Pricing logic
 const pricing = {
@@ -159,28 +162,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const validatedData = insertBookingSchema.parse(bookingData);
       const newBooking = await storage.createBooking(validatedData);
 
-      // Send confirmation email
-      const language = req.body.language || "en";
-      const pdfBuffer = generateBookingPDF(newBooking, language);
-      
-      const subject = language === "ar" 
-        ? "تأكيد حجز جولات كيريم VIP"
-        : "Kerim VIP Tours Booking Confirmation";
-        
-      const text = language === "ar"
-        ? "شكرًا لحجزك مع كيريم VIP Tours. يرجى العثور على تأكيد الحجز المرفق."
-        : "Thank you for booking with Kerim VIP Tours. Please find your booking confirmation attached.";
-
-      await transporter.sendMail({
-        from: process.env.SMTP_USER || "teamgog3@gmail.com",
-        to: newBooking.email,
-        subject,
-        text,
-        attachments: [{
-          filename: "booking-confirmation.pdf",
-          content: pdfBuffer,
-        }],
-      });
+      // Email functionality temporarily disabled - booking confirmation will be handled later
+      console.log("Booking created successfully:", newBooking.id);
 
       res.status(201).json(newBooking);
     } catch (error) {
