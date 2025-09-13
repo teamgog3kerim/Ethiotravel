@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, Copy, Coins, AlertCircle } from "lucide-react";
+import binancePayQR from "@assets/binance-pay-qr.png";
 
 interface PaymentSectionProps {
   bookingId?: string;
@@ -22,7 +23,7 @@ export function PaymentSection({ bookingId, amount = 500 }: PaymentSectionProps)
   const [isCopied, setIsCopied] = useState(false);
   const [paymentConfirmed, setPaymentConfirmed] = useState(false);
 
-  const walletAddress = "TCdeZjG39zU9SjtoLwfXmcedJhnXyNd8zB";
+  const binancePayId = "User-464cd";
   
   const confirmPaymentMutation = useMutation({
     mutationFn: async (data: { transactionId: string }) => {
@@ -53,19 +54,19 @@ export function PaymentSection({ bookingId, amount = 500 }: PaymentSectionProps)
     },
   });
 
-  const copyWalletAddress = async () => {
+  const copyBinanceId = async () => {
     try {
-      await navigator.clipboard.writeText(walletAddress);
+      await navigator.clipboard.writeText(binancePayId);
       setIsCopied(true);
       toast({
-        title: t('payment.copied', 'Address Copied'),
-        description: t('payment.copiedDesc', 'Wallet address copied to clipboard'),
+        title: t('payment.copied', 'ID Copied'),
+        description: t('payment.copiedDesc', 'Binance Pay ID copied to clipboard'),
       });
       setTimeout(() => setIsCopied(false), 2000);
     } catch (err) {
       toast({
         title: t('payment.copyError', 'Copy Failed'),
-        description: t('payment.copyErrorDesc', 'Failed to copy address'),
+        description: t('payment.copyErrorDesc', 'Failed to copy ID'),
         variant: "destructive",
       });
     }
@@ -104,12 +105,12 @@ export function PaymentSection({ bookingId, amount = 500 }: PaymentSectionProps)
                 
                 <div className="space-y-3">
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">{t('payment.currency')}</span>
-                    <span className="font-semibold text-foreground">USDT</span>
+                    <span className="text-muted-foreground">{t('payment.method')}</span>
+                    <span className="font-semibold text-foreground">Binance Pay</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">{t('payment.network')}</span>
-                    <span className="font-semibold text-foreground">TRON (TRC20)</span>
+                    <span className="text-muted-foreground">{t('payment.currency')}</span>
+                    <span className="font-semibold text-foreground">USDT / Crypto</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">{t('payment.amount')}</span>
@@ -123,17 +124,17 @@ export function PaymentSection({ bookingId, amount = 500 }: PaymentSectionProps)
             
             <Card>
               <CardContent className="p-6">
-                <h4 className="font-semibold text-foreground mb-3">{t('payment.walletAddress')}</h4>
+                <h4 className="font-semibold text-foreground mb-3">{t('payment.binanceId')}</h4>
                 <div className="bg-muted p-3 rounded border border-border flex items-center justify-between">
-                  <code className="text-sm text-foreground break-all flex-1" data-testid="text-walletAddress">
-                    {walletAddress}
+                  <code className="text-sm text-foreground break-all flex-1" data-testid="text-binanceId">
+                    {binancePayId}
                   </code>
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={copyWalletAddress}
+                    onClick={copyBinanceId}
                     className="ml-2 text-primary hover:text-primary/80"
-                    data-testid="button-copyAddress"
+                    data-testid="button-copyId"
                   >
                     {isCopied ? <CheckCircle className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                   </Button>
@@ -147,8 +148,8 @@ export function PaymentSection({ bookingId, amount = 500 }: PaymentSectionProps)
                 {t('payment.important')}
               </h4>
               <ul className="text-sm text-foreground space-y-1">
+                <li>{t('payment.binanceApp')}</li>
                 <li>{t('payment.exactAmount')}</li>
-                <li>{t('payment.tronNetwork')}</li>
                 <li>{t('payment.saveTransaction')}</li>
               </ul>
             </div>
@@ -158,13 +159,13 @@ export function PaymentSection({ bookingId, amount = 500 }: PaymentSectionProps)
           <div className="text-center space-y-8">
             <div className="bg-white p-8 rounded-2xl shadow-lg inline-block">
               <img 
-                src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${walletAddress}`}
-                alt="USDT Wallet QR Code"
+                src={binancePayQR}
+                alt="Binance Pay QR Code"
                 className="w-64 h-64 mx-auto"
                 data-testid="img-qrCode"
               />
               <p className="text-sm text-muted-foreground mt-4">
-                {t('payment.scanToPay')}
+                {t('payment.scanBinance')}
               </p>
             </div>
             
@@ -187,7 +188,7 @@ export function PaymentSection({ bookingId, amount = 500 }: PaymentSectionProps)
                     id="transactionId"
                     value={transactionId}
                     onChange={(e) => setTransactionId(e.target.value)}
-                    placeholder="Enter transaction ID after payment"
+                    placeholder="Enter Binance Pay transaction ID after payment"
                     data-testid="input-transactionId"
                   />
                 </div>
