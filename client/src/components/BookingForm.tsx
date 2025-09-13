@@ -38,7 +38,7 @@ export function BookingForm({ onBookingCreated }: BookingFormProps) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [calculatedPrice, setCalculatedPrice] = useState(0);
+  const [calculatedPrice, setCalculatedPrice] = useState(500);
 
   const form = useForm<BookingFormData>({
     resolver: zodResolver(insertBookingSchema.extend({
@@ -51,10 +51,10 @@ export function BookingForm({ onBookingCreated }: BookingFormProps) {
       fullName: "",
       email: "",
       numberOfPersons: 1,
-      hotelPreference: "",
+      hotelPreference: "5-star-luxury",
       arrivalDate: "",
       departureDate: "",
-      travelPurpose: "",
+      travelPurpose: "tourism",
       specialRequests: "",
       totalAmount: 500,
       paymentStatus: "pending",
@@ -237,7 +237,7 @@ export function BookingForm({ onBookingCreated }: BookingFormProps) {
               <div className="grid md:grid-cols-3 gap-4">
                 <div>
                   <Label>{t('booking.numberOfPersons')}</Label>
-                  <Select onValueChange={handlePersonsChange} data-testid="select-numberOfPersons">
+                  <Select onValueChange={handlePersonsChange} defaultValue="1" data-testid="select-numberOfPersons">
                     <SelectTrigger>
                       <SelectValue placeholder="Select..." />
                     </SelectTrigger>
@@ -276,7 +276,7 @@ export function BookingForm({ onBookingCreated }: BookingFormProps) {
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <Label>{t('booking.hotelPreference')}</Label>
-                  <Select onValueChange={(value) => form.setValue('hotelPreference', value)} data-testid="select-hotelPreference">
+                  <Select onValueChange={(value) => form.setValue('hotelPreference', value)} defaultValue="5-star-luxury" data-testid="select-hotelPreference">
                     <SelectTrigger>
                       <SelectValue placeholder="Select hotel category..." />
                     </SelectTrigger>
@@ -296,7 +296,7 @@ export function BookingForm({ onBookingCreated }: BookingFormProps) {
                 
                 <div>
                   <Label>{t('booking.travelPurpose')}</Label>
-                  <Select onValueChange={(value) => form.setValue('travelPurpose', value)} data-testid="select-travelPurpose">
+                  <Select onValueChange={(value) => form.setValue('travelPurpose', value)} defaultValue="tourism" data-testid="select-travelPurpose">
                     <SelectTrigger>
                       <SelectValue placeholder="Select purpose..." />
                     </SelectTrigger>
